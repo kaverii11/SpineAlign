@@ -1,81 +1,125 @@
-# SpineAlign
-POSTURE CORRECTION DEVICE USING SENSORS
-Body Posture Detection with IMU, Flex, and Ultrasonic Sensors
+# 🧍‍♂️ SpineAlign  
+## Posture Correction Device Using Sensors
 
-Overview
+**SpineAlign** is a smart posture monitoring system that uses sensor fusion to detect incorrect body posture in real time. By combining IMU, flex, and ultrasonic sensors, the device accurately tracks body alignment and helps classify posture based on movement and position data.
 
-This project utilizes multiple sensors to detect body posture accurately. The system integrates an MPU6050 IMU sensor, flex sensors, and an ultrasonic distance sensor to analyze movement and position. Data is processed using Arduino.
+---
 
-Features
+## 📌 Overview
 
-Real-time posture tracking using accelerometer, gyroscope, and flex sensor data.
-.
+SpineAlign leverages multiple sensors to analyze body orientation, joint bending, and distance from reference points. The system processes sensor data using an Arduino-compatible microcontroller and visualizes posture in real time using **Processing**.
 
-Sensor fusion using MPU6050's Digital Motion Processing (DMP).
+**Sensors Used:**
+- MPU6050 – Accelerometer + Gyroscope (IMU)
+- Flex Sensors – Detect joint bending
+- Ultrasonic Sensor (HC-SR04) – Measures proximity and position
 
-Ultrasonic distance measurement for position detection.
+---
 
-Posture classification based on sensor data.
+## ✨ Features
 
-Hardware Requirements
+- Real-time posture tracking  
+- Sensor fusion using MPU6050 Digital Motion Processing (DMP)  
+- Detection of body inclination and joint bending  
+- Ultrasonic-based distance measurement  
+- Posture classification using combined sensor data  
+- Live posture visualization using Processing  
 
-MPU6050 (6-axis accelerometer + gyroscope sensor)
+---
 
-Flex sensors (to detect joint bending)
+## 🛠 Hardware Requirements
 
-Ultrasonic distance sensor (e.g., HC-SR04 for measuring proximity)
+- MPU6050 (6-axis accelerometer + gyroscope)
+- Flex sensors
+- Ultrasonic distance sensor (HC-SR04)
+- Arduino Uno / Nano / ESP32 (or compatible)
+- USB cable
+- Jumper wires
+- Pull-down resistors (for flex sensors)
 
-Arduino Uno/Nano/ESP32 (or any compatible microcontroller)
+---
 
-USB cable for serial communication
+## 💻 Software Requirements
 
-Jumper wires
+- Arduino IDE
+- Processing IDE
 
-Software Requirements
+### Required Arduino Libraries
 
-Arduino IDE
+Install the following libraries from **Arduino Library Manager**:
 
-Install the MPU6050 library by Electronic Cats
-Sketch -> Include Library -> Manage Libraries -> Search "MPU6050" -> Install
-Install I2Cdev library (required for MPU6050 communication).
-Install NewPing library for the ultrasonic sensor.
+- MPU6050 by Electronic Cats  
+- I2Cdev (dependency for MPU6050)  
+- NewPing (for ultrasonic sensor)
 
+---
 
-Setup & Installation
+## 🔌 Circuit Connections
 
-Connect MPU6050 to Arduino:
-VCC  -> 3.3V / 5V (depending on board)
-GND  -> GND
-SDA  -> A4 (on Uno) / D21 (on ESP32)
-SCL  -> A5 (on Uno) / D22 (on ESP32)
-Connect Flex Sensors to Arduino:
+### MPU6050 → Arduino
 
-One end of the flex sensor goes to VCC (5V).
+| MPU6050 | Arduino Uno | ESP32 |
+|------|------------|-------|
+| VCC | 3.3V / 5V | 3.3V |
+| GND | GND | GND |
+| SDA | A4 | D21 |
+| SCL | A5 | D22 |
 
-The other end is connected to an analog input (A0) via a pull-down resistor.
+---
 
-Connect Ultrasonic Sensor (HC-SR04):
-VCC   -> 5V
-GND   -> GND
-Trig  -> D9
-Echo  -> D10
+### Flex Sensor → Arduino
 
-Upload Arduino Code:
+- One end → **5V**
+- Other end → **Analog Pin (A0)**
+- Use a **pull-down resistor** to GND
 
-Open the Arduino sketch (posture_detection.ino).
+---
 
-Select the correct board and port.
+### Ultrasonic Sensor (HC-SR04) → Arduino
 
-Upload the code.
+| HC-SR04 | Arduino |
+|-------|--------|
+| VCC | 5V |
+| GND | GND |
+| Trig | D9 |
+| Echo | D10 |
 
-Run Processing Visualization:
+---
 
-Open posture_visualization.pde in Processing.
+## 🚀 Setup & Installation
 
-Modify COMXX in setup() to match your Arduino's serial port.
+### 1️⃣ Upload Arduino Code
 
-Run the Processing sketch to visualize posture in real time.
+1. Open `posture_detection.ino`
+2. Select the correct **board** and **COM port**
+3. Upload the sketch to the Arduino
 
-Author
+---
 
-Developed by Kaveri Sharma, Khushi B, and Khushi Mahesh.
+### 2️⃣ Run Visualization
+
+1. Open `posture_visualization.pde` in **Processing**
+2. Update the serial port inside `setup()`:
+   ```java
+   new Serial(this, "COMXX", 9600);
+3. Run the sketch to visualize posture data in real time
+
+### 📊 How It Works
+
+MPU6050 tracks orientation and motion
+
+Flex sensors detect joint bending
+
+Ultrasonic sensor measures distance from reference
+
+Sensor data is fused and processed on Arduino
+
+Posture is classified and visualized live
+
+### 👩‍💻 Authors
+
+Kaveri Sharma
+
+Khushi B
+
+Khushi Mahesh
